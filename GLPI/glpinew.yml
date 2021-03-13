@@ -110,8 +110,8 @@
   - name: Parando o serviço do Apache2
     ansible.builtin.service:
       name: apache2
-      enabled: yes
-      state: stop
+      enabled: no
+      state: stopped
 
   - name: Alterar a porta do apache para 8000
     ansible.builtin.command:
