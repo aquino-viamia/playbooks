@@ -7,7 +7,7 @@
       prompt: "Informe qual será o site EX: www.felipeaquino.eti.br"
       private: no
   tasks:
-  - name: Allow 'wheel' group to have passwordless sudo
+  - name: Adicionando o usuário tiadm em sudo sem senha
     lineinfile:
       dest: /etc/sudoers
       state: present
@@ -22,6 +22,8 @@
 
   - name: Update pacotes
     apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+
   - name: Upgrade pacotes
     apt: upgrade=dist force_apt_get=yes
 
@@ -48,6 +50,8 @@
       - php7.2-cli
       - php7.2-zip
       - php7.2-sqlite3
+
+
   - name: Alterando arquivo de configuração do PHP 7.2
     ansible.builtin.command: "{{ item }}"
     with_items:
@@ -58,6 +62,8 @@
     - sed -i "s/max_execution_time = 30/max_execution_time = 360/g" /etc/php/7.2/fpm/php.ini
     - sed -i "s/; max_input_vars = 1000/max_input_vars = 1500/g" /etc/php/7.2/fpm/php.ini
     - sed -i "s|;date.timezone =|date.timezone = America/Sao_Paulo|g" /etc/php/7.2/fpm/php.ini
+
+
   - name: Criando Diretório do Site
     ansible.builtin.file:
       path: /sites/{{ site }}
@@ -66,3 +72,28 @@
       owner: www-data
       group: www-data
       mode: 0755
+
+
+  - name: Criando arquivos de configuração do site
+    ansible.builtin.command: "echo {{ item }} >> /sites/{{ site }}"
+    with_items:
+    - server {
+    -     listen 80;
+    -     listen [::]:80;
+    -     server_name  example.com www.example.com;
+    -     root   /var/www/glpi;
+    -     index  index.php;
+    -     access_log /var/log/nginx/example.com.access.log;
+    -     error_log /var/log/nginx/example.com.error.log;
+    -     client_max_body_size 100M;
+    -     autoindex off;
+    -     location / {
+    -     try_files $uri $uri/ index.php;;
+    -       }
+    -     location ~ \.php$ {
+    -          include snippets/fastcgi-php.conf;
+    -          fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    -          include fastcgi_params;
+    -          fastcgi_intercept_errors on;
+    -     }
+    - }
