@@ -88,7 +88,7 @@
     - 'server {'
     - 'listen 80;'
     - 'listen [::]:80;'
-    - 'server_name  {{ site }};'
+    - 'server_name  {{ site }} www.{{ site}};'
     - 'root   /sites/{{ site }};'
     - 'index  index.php;'
     - 'access_log /var/log/nginx/{{ site }}.access.log;'
