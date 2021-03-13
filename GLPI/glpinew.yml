@@ -74,10 +74,14 @@
       mode: 0755
 
 
-  - name: Criando arquivos de configuração do site
+  - name: Criando arquivo de configuração do site
+    ansible.builtin.file:
+    path: /etc/nginx/conf.d/{{ site }}.conf
+
+  - name: configurando os parametros no arquivos de configuração do site
     lineinfile:
-      path: /site/{{ site }}
-      line: '{{ item}}'
+      path: /etc/nginx/conf.d/{{ site }}.conf
+      line: '{{ item }}'
       state: present
     with_items:
     - 'server {'
