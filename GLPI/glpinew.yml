@@ -1,5 +1,5 @@
 ---
-- name: Criando usuário de Automação
+- name: Instalação do GLPI para VIA MIA
   hosts: 192.168.1.203
   become: yes
   tasks:
