@@ -2,6 +2,9 @@
 - name: Instalação do GLPI para VIA MIA
   hosts: 192.168.1.203
   become: yes
+  vars_prompt:
+    - name: site
+      prompt: Informe qual será o site (EX: www.felipeaquino.eti.br)
   tasks:
   - name: Allow 'wheel' group to have passwordless sudo
     lineinfile:
@@ -53,4 +56,12 @@
     - sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 50M/g" /etc/php/7.2/fpm/php.ini
     - sed -i "s/max_execution_time = 30/max_execution_time = 360/g" /etc/php/7.2/fpm/php.ini
     - sed -i "s/; max_input_vars = 1000/max_input_vars = 1500/g" /etc/php/7.2/fpm/php.ini
-    - sed -i "s/;date.timezone =|date.timezone = America/Sao_Paulo/g" /etc/php/7.2/fpm/php.ini
+    - sed -i "s|;date.timezone =|date.timezone = America/Sao_Paulo|g" /etc/php/7.2/fpm/php.ini
+  - name: Criando Diretório do Site
+    ansible.builtin.file:
+      path: /sites/{{ site }}
+      state: directory
+      recurse: yes
+      owner: www-data
+      group: www-data
+      mode: 0755
