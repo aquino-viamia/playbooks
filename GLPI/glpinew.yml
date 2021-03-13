@@ -5,6 +5,7 @@
   vars_prompt:
     - name: site
       prompt: "Informe qual será o site EX: www.felipeaquino.eti.br"
+      private: no
   tasks:
   - name: Allow 'wheel' group to have passwordless sudo
     lineinfile:
