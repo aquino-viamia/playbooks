@@ -76,7 +76,8 @@
 
   - name: Criando arquivo de configuração do site
     ansible.builtin.file:
-    path: /etc/nginx/conf.d/{{ site }}.conf
+      path: /etc/nginx/conf.d/{{ site }}.conf
+      state: touch
 
   - name: configurando os parametros no arquivos de configuração do site
     lineinfile:
