@@ -1,6 +1,7 @@
 ---
 - name: Criando usuário de Automação
   hosts: 192.168.1.203
+  become: yes
   tasks:
   - name: Allow 'wheel' group to have passwordless sudo
     lineinfile:
@@ -9,7 +10,6 @@
       regexp: '^tiadm'
       line: 'tiadm ALL=(ALL) NOPASSWD: ALL'
       validate: 'visudo -cf %s'
-    become: yes
 
   - name: Install Repositorios Necessários
     ansible.builtin.apt_repository:
