@@ -79,23 +79,23 @@
       path: /site/{{ site }}
       line: '{{ item}}'
     with_items:
-    - server {
-    - listen 80;
-    - listen [::]:80;
-    - server_name  example.com www.example.com;
-    - root   /var/www/glpi;
-    - index  index.php;
-    - access_log /var/log/nginx/example.com.access.log;
-    - error_log /var/log/nginx/example.com.error.log;
-    - client_max_body_size 100M;
-    - autoindex off;
-    - location / {
-    - try_files $uri $uri/ index.php;;
-    - }
-    - location ~ \.php$ {
-    - include snippets/fastcgi-php.conf;
-    - fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
-    - include fastcgi_params;
-    - fastcgi_intercept_errors on;
-    - }
-    - }
+    - 'server {'
+    - 'listen 80;'
+    - 'listen [::]:80;'
+    - 'server_name  example.com www.example.com;'
+    - 'root   /var/www/glpi;'
+    - 'index  index.php;'
+    - 'access_log /var/log/nginx/example.com.access.log;'
+    - 'error_log /var/log/nginx/example.com.error.log;'
+    - 'client_max_body_size 100M;'
+    - 'autoindex off;'
+    - 'location / {'
+    - 'try_files $uri $uri/ index.php;;'
+    - '}'
+    - 'location ~ \.php$ {'
+    - 'include snippets/fastcgi-php.conf;'
+    - 'fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;'
+    - 'include fastcgi_params;'
+    - 'fastcgi_intercept_errors on;'
+    - '}'
+    - '}'
