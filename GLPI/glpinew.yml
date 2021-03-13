@@ -53,4 +53,4 @@
     - sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 50M/g" /etc/php/7.2/fpm/php.ini
     - sed -i "s/max_execution_time = 30/max_execution_time = 360/g" /etc/php/7.2/fpm/php.ini
     - sed -i "s/; max_input_vars = 1000/max_input_vars = 1500/g" /etc/php/7.2/fpm/php.ini
-    - sed -i "s/;date.timezone =/'date.timezone = America/Sao_Paulo'/g" /etc/php/7.2/fpm/php.ini
+    - sed -i "s/;date.timezone =|date.timezone = America/Sao_Paulo/g" /etc/php/7.2/fpm/php.ini
