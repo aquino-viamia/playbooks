@@ -113,7 +113,8 @@
     - '                deny all;'
     - '        }'
     - '}'
-
+    - '}'
+    - '}'
 
 
   - name: Parando o serviço do Apache2
