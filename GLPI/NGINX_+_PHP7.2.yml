@@ -50,6 +50,8 @@
       - php7.2-cli
       - php7.2-zip
       - php7.2-sqlite3
+      - php7.2-apcu
+      - php7.2-bz2
 
 
   - name: Alterando arquivo de configuração do PHP 7.2
